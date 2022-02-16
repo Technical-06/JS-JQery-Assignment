@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>JQuery Assignment</title>
+    <style>
+        .infomationPallete {
+            padding: 1rem;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 1rem;
+            margin-bottom: 10px;
+            border-color: blueviolet;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            background-color: lightblue;
+        }
+
+        .body {
+            font-size: 0.9rem;
+            background-color: cornsilk;
+
+        }
+
+        .infomationPallete:hover {
+            background-color: #f6f6f6;
+        }
+
+        button {
+            background-color: #008CBA;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 8px 3px 8px 3px #B28164;
+            border-radius: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="comments" style="border: 1px solid blue; padding: 1rem; margin-bottom: 0.5rem"></div>
+    <button id="load">Load Data</button>
+    <script>
+        $(document).ready(function () {
+            var $comments = $(".comments");
+
+            $("#load").click(function (e) {
+                $.ajax({
+                    type: "GET",
+                    url: "https://jsonplaceholder.typicode.com/posts",
+                    success: function (posts) {
+                        $.each(posts, function (i, post) {
+                            var element = `<div id="${post.id}" class="infomationPallete">
+                  <h3 class="title">${post.title}</h3>
+                  <p class="body">${post.body}</p>
+                </div>`;
+                            $comments.append(element);
+                        });
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
